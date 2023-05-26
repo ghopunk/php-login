@@ -1,0 +1,29 @@
+{
+    "name": "ghopunk/php-login",
+    "description": "PHP Login without Database",
+    "keywords": [
+        "ghopunk",
+        "php"
+    ],
+    "homepage": "https://github.com/ghopunk/php-login",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ghopunk",
+            "email": "support@bloggerpemalas.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "ghopunk/php-encryption": "*",
+		"ghopunk/php-server": "*",
+		"ghopunk/php-cookie": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ghopunk\\Login\\": "src"
+        }
+    },
+    "prefer-stable": true
+}
