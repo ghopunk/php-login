@@ -1,5 +1,5 @@
 <?php
-namespace ghopunk\Validate;
+namespace ghopunk\Helpers;
 
 use ghopunk\Helpers\Encryption;
 use ghopunk\Helpers\Servers\Is;

@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ghopunk\\Login\\": "src"
+            "ghopunk\\Helpers\\": "src"
         }
     },
     "prefer-stable": true
