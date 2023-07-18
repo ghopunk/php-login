@@ -1,4 +1,5 @@
 <?php
+
 namespace ghopunk\Helpers;
 
 use ghopunk\Helpers\Encryption;
@@ -199,5 +200,3 @@ class Login {
 		return $this->error;
 	}
 }
-
-?>
