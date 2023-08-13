@@ -7,13 +7,14 @@ use ghopunk\Helpers\Servers\Is;
 use ghopunk\Helpers\Cookie;
 
 class Login {
-	private $domainCode 	= 'bgp';
+	private $domainCode = 'bgp';
 	
-	public $lastLogin 		= false;
-	public $error 			= false;
-	protected $users 		= array();
-	private $userName 		= false;
-	private $isLogin 		= false;
+	public $lastLogin;
+	private $error;
+	protected $users 	= array();
+	private $userName 	= false;
+	private $isLogin 	= false;
+	private $cookie;
 	public $expiredCookie;
 	
 	public function __construct( $uniqueCode = false, $path = false, $expired = false ){
@@ -103,21 +104,19 @@ class Login {
 		return $this->userName;
 	}
 	
-	public function setEncryption( $g_encryption ){
-		$this->g_encryption = $g_encryption;
+	public function setEncryption( Encryption $encryption ){
+		$this->encryption = $encryption;
 	}
 	public function getEncryption(){
-		if( empty( $this->g_encryption ) && class_exists( 'Encryption' ) ) {
-			$g_encryption = new Encryption;
-			$this->setEncryption( $g_encryption );
+		if( empty( $this->encryption ) && class_exists( '\ghopunk\Helpers\Encryption' ) ) {
+			$encryption = new Encryption;
+			$this->setEncryption( $encryption );
 		}
-		return $this->g_encryption;
+		return $this->encryption;
 	}
 	public function setUniquecode( $uniqueCode ){
 		if( method_exists( $this->getEncryption(), 'setUniquecode' ) ){
 			$this->getEncryption()->setUniquecode( $uniqueCode );
-		} else {
-			$this->setDomainCode( $uniqueCode );
 		}
 	}
 	public function getUniquecode(){
@@ -157,29 +156,29 @@ class Login {
 					$_pid = $this->decode( $_pid );
 					if( $_pid == $this->users[$_uname] ){
 						$this->setUserName( $_uname );
-						return TRUE;
+						return true;
 					}
 				}
 			}
 		}
-		return FALSE;
+		return false;
 	}
 	public function checkUserLogin( $userName ) {
 		$_uname = $this->cookie->get( $this->getCookieKey( 'uname' ) );
 		if( $userName == $_uname ){
 			$this->setUserName( $_uname );
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 	public function getCookieLogin() {
 		if ( 	!empty( $this->cookie->get( $this->getCookieKey( 'uid' ) ) )
 				&& !empty( $this->cookie->get( $this->getCookieKey( 'cid' ) ) ) 
 				&& !empty( $this->cookie->get( $this->getCookieKey( 'uname' ) ) ) 
 		) {
-				return TRUE;
+				return true;
 		}
-		return FALSE;
+		return false;
 	}
 	public function errorLogin() {
 		if ( !empty( $this->getError() ) ) {
